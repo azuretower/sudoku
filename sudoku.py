@@ -42,9 +42,10 @@ def print_puzzle():
         for j in range(1, 10):
             # chr(i+64) will return A through I, see top of file
             if current_puzzle[chr(i + 64)][str(j)] is -1:
-                temp += 'X '
+                # the character to print if spot is empty
+                temp += '. '
             else:
-                temp += str(current_puzzle[str(i)][str(j)]) + ' '
+                temp += str(current_puzzle[chr(i + 64)][str(j)]) + ' '
             if j is 3:
                 temp += '| '
             if j is 6:
@@ -72,18 +73,23 @@ while True:
 
     # Enter a number
     if choice is '1':
-        status_message = 'Enter Location as Letter Number pair and the number ie: A1 1'
+        status_message = 'Enter Location as Row Column Entry. ie: A 1 1'
         error = False
+        row = ''
+        column = -1
+        number = -1
         os.system('clear')
         print_puzzle()
         print ''
         print status_message
         number = raw_input(':')
         try:
-            location, number = number.split()
+            row, column, number = number.split()
         except ValueError, e:
             status_message = 'Incorrect input'
             error = True
+        if row != range(ord('A'), ord('J')):
+            pass
 
         os.system('clear')
         if not error:
@@ -91,7 +97,7 @@ while True:
 
     elif choice is '2':
         os.system('clear')
-        print ord('A')
+        print ord('I')
 
     elif choice is '3':
         os.system('clear')
